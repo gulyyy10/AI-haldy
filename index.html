@@ -119,7 +119,7 @@
     </div>
   </div>
 
-  <script>
+ <script>
     function sendMessage() {
       const input = document.getElementById('user-input');
       const message = input.value.trim();
@@ -143,17 +143,37 @@
     function getBotResponse(msg) {
       msg = msg.toLowerCase();
 
+      // Pozdravy a smalltalk
       if (msg.includes('ahoj') || msg.includes('nazdar') || msg.includes('čau')) return 'Čau! Jak ti můžu pomoct? Zajímá tě bydlení, auto nebo něco jinýho?';
       if (msg.includes('jak se máš') || msg.includes('jak se vede')) return 'Mám se skvěle, díky že se ptáš! A co ty – chceš řešit bydlení nebo něco jiného?';
-      if (msg.includes('hypotéka')) return 'Pokud ti nevyšla hypotéka, mrkneme se na investora nebo pronájem na splátky. Máš něco našetřeno?';
-      if (msg.includes('auto')) return 'Auta máme taky! Třeba Octavii, Passata nebo BMW – vše i bez registru. Mrkni do sekce "Auta na splátky".';
-      if (msg.includes('bydlení') || msg.includes('byt') || msg.includes('dům')) return 'Zajímá tě byt nebo dům? Máme nabídky např. v Praze a Plzni, podívej se výš na webu.';
-      if (msg.includes('exekuce') || msg.includes('dluh') || msg.includes('insolvence')) return 'Exekuce není konec světa. Můžeme najít řešení přes investora nebo zálohový systém – napiš, kolik máš na začátek?';
-      if (msg.includes('kontakt') || msg.includes('email') || msg.includes('telefon')) return 'Nejlépe nás kontaktuj přes formulář dole nebo napiš na info@splatkyaut.cz';
+      if (msg.includes('kdo jsi') || msg.includes('co jsi')) return 'Jsem Gulinho bot – tvůj AI kámoš pro bydlení, auta a život na splátky bez banky.';
 
-      return 'Tohle zatím neumím, ale klidně mi napiš jinak nebo klikni na nabídku nahoře.';
+      // Bydlení, nemovitosti
+      if (msg.includes('bydlení') || msg.includes('byt') || msg.includes('dům') || msg.includes('nemovitost')) return 'Zajímá tě byt nebo dům? Máme nabídky třeba v Praze a Plzni. Klikni na sekci "Bydlení" výš na webu nebo mi napiš, co hledáš.';
+      if (msg.includes('nájem') || msg.includes('nájmu')) return 'Máme i možnost nájmu se splátkou – napiš, kde chceš bydlet a kolik máš na začátek.';
+
+      // Auta
+      if (msg.includes('auto') || msg.includes('vozidlo') || msg.includes('auta')) return 'Máme Octavie, Passaty, BMW… i bez kontroly registrů. Mrkni na sekci "Auta na splátky" nebo napiš, co chceš.';
+
+      // Finance, problémy, schválení
+      if (msg.includes('hypotéka') || msg.includes('úvěr') || msg.includes('banka')) return 'Pokud ti nevyšla hypotéka, máme řešení přes investory. Stačí i malá záloha – napiš, kolik máš.';
+      if (msg.includes('exekuce') || msg.includes('dluh') || msg.includes('insolvence') ||
+          msg.includes('jak z toho ven') || msg.includes('mám dluhy') || msg.includes('nemám peníze') ||
+          msg.includes('co dělat při exekuci') || msg.includes('nezvládám splácet'))
+        return 'Exekuce ani dluhy nejsou konec světa. Umíme to řešit mimo banku. Napiš mi, co hledáš a kolik máš našetřeno.';
+
+      // Kontakt a komunikace
+      if (msg.includes('kontakt') || msg.includes('email') || msg.includes('telefon') || msg.includes('spojuji se')) return 'Můžeš nám napsat na info@splatkyaut.cz nebo přes formulář dole. Ozveme se do 24h.';
+
+      // Obecné otázky a motivace
+      if (msg.includes('pomoc') || msg.includes('můžeš mi pomoct')) return 'Jsem tady od toho. Stačí napsat, co řešíš – najdeme cestu.';
+      if (msg.includes('co nabízíte') || msg.includes('jak to funguje')) return 'Nabízíme bydlení, auta i produkty na splátky bez banky. Vybíráš na webu, sepíšeš žádost, a my to řešíme individuálně.';
+      if (msg.includes('proč vy') || msg.includes('proč s vámi')) return 'Protože ti rozumíme. Nehodnotíme tě podle banky – ale podle toho, co můžeš a chceš. Víc lidí už takto bydlí nebo jezdí autem. Můžeš být další.';
+
+      return 'Tohle zatím neumím, ale klidně mi napiš jinak nebo klikni na nabídku nahoře. Neboj se zeptat lidsky 🙌';
     }
-  </script>
+</script>
+
 
 </body>
 </html>
