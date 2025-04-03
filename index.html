@@ -142,13 +142,18 @@
 
     function getBotResponse(msg) {
       msg = msg.toLowerCase();
+
+      if (msg.includes('ahoj') || msg.includes('nazdar') || msg.includes('čau')) return 'Čau! Jak ti můžu pomoct? Zajímá tě bydlení, auto nebo něco jinýho?';
+      if (msg.includes('jak se máš') || msg.includes('jak se vede')) return 'Mám se skvěle, díky že se ptáš! A co ty – chceš řešit bydlení nebo něco jiného?';
       if (msg.includes('hypotéka')) return 'Pokud ti nevyšla hypotéka, mrkneme se na investora nebo pronájem na splátky. Máš něco našetřeno?';
       if (msg.includes('auto')) return 'Auta máme taky! Třeba Octavii, Passata nebo BMW – vše i bez registru. Mrkni do sekce "Auta na splátky".';
-      if (msg.includes('bydlení')) return 'Zajímá tě byt nebo dům? Máme nabídky např. v Praze a Plzni, podívej se výš na webu.';
-      if (msg.includes('exekuce')) return 'Exekuce není konec světa. Můžeme najít řešení přes investora nebo zálohový systém – napiš, kolik máš na začátek?';
-      if (msg.includes('kontakt')) return 'Nejlépe nás kontaktuj přes formulář dole nebo napiš na info@splatkyaut.cz';
+      if (msg.includes('bydlení') || msg.includes('byt') || msg.includes('dům')) return 'Zajímá tě byt nebo dům? Máme nabídky např. v Praze a Plzni, podívej se výš na webu.';
+      if (msg.includes('exekuce') || msg.includes('dluh') || msg.includes('insolvence')) return 'Exekuce není konec světa. Můžeme najít řešení přes investora nebo zálohový systém – napiš, kolik máš na začátek?';
+      if (msg.includes('kontakt') || msg.includes('email') || msg.includes('telefon')) return 'Nejlépe nás kontaktuj přes formulář dole nebo napiš na info@splatkyaut.cz';
+
       return 'Tohle zatím neumím, ale klidně mi napiš jinak nebo klikni na nabídku nahoře.';
     }
   </script>
+
 </body>
 </html>
