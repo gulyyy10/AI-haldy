@@ -22,8 +22,7 @@
     .card p { font-size: 0.95rem; }
     footer { text-align: center; padding: 20px; background: #1e40af; color: white; margin-top: 60px; }
 
-    /* Chatbot styles */
-    #chatbot-container { position: fixed; bottom: 20px; right: 20px; width: 320px; max-height: 500px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); overflow: hidden; display: flex; flex-direction: column; }
+    #chatbot-container { position: fixed; bottom: 20px; right: 20px; width: 90%; max-width: 320px; max-height: 500px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); overflow: hidden; display: flex; flex-direction: column; z-index: 9999; }
     #chatbot-header { background: #1e40af; color: white; padding: 10px; font-weight: bold; text-align: center; }
     #chatbot-messages { flex-grow: 1; padding: 10px; overflow-y: auto; font-size: 0.95rem; }
     .msg { margin: 5px 0; }
@@ -32,6 +31,13 @@
     #chatbot-input { display: flex; border-top: 1px solid #ccc; }
     #chatbot-input input { flex-grow: 1; padding: 10px; border: none; }
     #chatbot-input button { background: #1e40af; color: white; border: none; padding: 0 15px; cursor: pointer; }
+
+    @media (max-width: 600px) {
+      .hero h2 { font-size: 1.8rem; }
+      .hero p { font-size: 1rem; }
+      .card h3 { font-size: 1rem; }
+      .card p { font-size: 0.85rem; }
+    }
   </style>
 </head>
 <body>
@@ -75,6 +81,10 @@
       <div class="card">
         <h3>BMW 3 E90</h3>
         <p>Možný odklad splátek, schválení do 24h</p>
+      </div>
+      <div class="card">
+        <h3>Volkswagen Passat B8</h3>
+        <p>Na splátky od 8 000 Kč, bez kontroly registrů – více na splatkyaut.cz</p>
       </div>
     </div>
   </section>
@@ -133,9 +143,10 @@
     function getBotResponse(msg) {
       msg = msg.toLowerCase();
       if (msg.includes('hypotéka')) return 'Pokud ti nevyšla hypotéka, mrkneme se na investora nebo pronájem na splátky. Máš něco našetřeno?';
-      if (msg.includes('auto')) return 'Auta máme taky! Od malých po luxusní, schválení i bez registru. Kolik máš na zálohu?';
-      if (msg.includes('bydlení')) return 'Zajímá tě byt nebo dům? A v jaké lokalitě?';
-      if (msg.includes('exekuce')) return 'Exekuce není problém – máme zkušenosti i s tím. Pojďme najít řešení.';
+      if (msg.includes('auto')) return 'Auta máme taky! Třeba Octavii, Passata nebo BMW – vše i bez registru. Mrkni do sekce "Auta na splátky".';
+      if (msg.includes('bydlení')) return 'Zajímá tě byt nebo dům? Máme nabídky např. v Praze a Plzni, podívej se výš na webu.';
+      if (msg.includes('exekuce')) return 'Exekuce není konec světa. Můžeme najít řešení přes investora nebo zálohový systém – napiš, kolik máš na začátek?';
+      if (msg.includes('kontakt')) return 'Nejlépe nás kontaktuj přes formulář dole nebo napiš na info@splatkyaut.cz';
       return 'Tohle zatím neumím, ale klidně mi napiš jinak nebo klikni na nabídku nahoře.';
     }
   </script>
