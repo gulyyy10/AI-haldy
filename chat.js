@@ -1,4 +1,3 @@
-
 function simulateClick(text) {
   document.getElementById('user-input').value = text;
   sendMessage();
@@ -22,27 +21,26 @@ async function sendMessage() {
   messagesContainer.appendChild(loadingMsg);
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer sk-proj-...TVŮJ_KLÍČ_SEM_NEZADÁVEJ_PŘÍMO'
-    },
-    body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        { role: 'system', content: 'Jsi chytrý asistent zaměřený na reality na splátky, investice a auta.' },
-        { role: 'user', content: text }
-      ]
-    })
-  });
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text })
+    });
 
-  const data = await response.json();
-  loadingMsg.remove();
+    const data = await response.json();
+    loadingMsg.remove();
 
-  const botMsg = document.createElement('div');
-  botMsg.className = 'msg bot';
-  botMsg.textContent = data.choices?.[0]?.message?.content || 'Něco se pokazilo.';
-  messagesContainer.appendChild(botMsg);
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    const botMsg = document.createElement('div');
+    botMsg.className = 'msg bot';
+    botMsg.textContent = data.message || 'Žádná odpověď od AI.';
+    messagesContainer.appendChild(botMsg);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  } catch (error) {
+    loadingMsg.remove();
+    const botMsg = document.createElement('div');
+    botMsg.className = 'msg bot';
+    botMsg.textContent = 'Chyba při komunikaci s AI.';
+    messagesContainer.appendChild(botMsg);
+  }
 }
