@@ -30,6 +30,7 @@
     .msg { margin: 5px 0; }
     .user { text-align: right; }
     .bot { text-align: left; color: #1d4ed8; }
+    .bot-options button { display: block; width: 100%; margin-top: 5px; background: none; border: none; color: #1d4ed8; text-align: left; padding: 6px 0; cursor: pointer; font-size: 0.95rem; }
     #chatbot-input { display: flex; border-top: 1px solid #ccc; }
     #chatbot-input input { flex-grow: 1; padding: 10px; border: none; }
     #chatbot-input button { background: #1d4ed8; color: white; border: none; padding: 0 15px; cursor: pointer; }
@@ -109,12 +110,13 @@
   <div id="chatbot-container">
     <div id="chatbot-header">💬 Gulinho AI</div>
     <div id="chatbot-messages">
-      <div class="msg bot">Ahoj! Jsem Gulinho bot. Vyber jednu možnost:
-        <ul>
-          <li>🏡 Chci koupit byt na splátky</li>
-          <li>🚗 Hledám auto na splátky</li>
-          <li>💸 Chci investovat do nemovitosti</li>
-        </ul>
+      <div class="msg bot">
+        Ahoj! Jsem Gulinho bot. Vyber jednu možnost:
+        <div class="bot-options">
+          <button onclick="simulateClick('Chci koupit byt na splátky')">🏡 Chci koupit byt na splátky</button>
+          <button onclick="simulateClick('Hledám auto na splátky')">🚗 Hledám auto na splátky</button>
+          <button onclick="simulateClick('Chci investovat do nemovitosti')">💸 Chci investovat do nemovitosti</button>
+        </div>
       </div>
     </div>
     <div id="chatbot-input">
@@ -124,6 +126,11 @@
   </div>
 
   <script>
+    function simulateClick(text) {
+      document.getElementById('user-input').value = text;
+      sendMessage();
+    }
+
     function sendMessage() {
       const input = document.getElementById('user-input');
       const messages = document.getElementById('chatbot-messages');
@@ -135,7 +142,6 @@
       messages.appendChild(userMsg);
       input.value = '';
 
-      // Simple hardcoded bot responses
       const botMsg = document.createElement('div');
       botMsg.className = 'msg bot';
       if (text.toLowerCase().includes('byt')) {
