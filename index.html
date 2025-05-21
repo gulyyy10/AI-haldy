@@ -3,46 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SplatkyProVsechny.cz</title>
+  <title>Reality na splátky | Gulinho</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
     body { background: #f6f7fb; color: #111; line-height: 1.6; }
-    header { background: #1e40af; padding: 20px; color: white; text-align: center; }
-    header h1 { font-size: 2rem; }
-    nav { display: flex; justify-content: center; gap: 20px; background: #3b82f6; padding: 15px 0; }
+    header { background: #1d4ed8; padding: 20px; color: white; text-align: center; }
+    header h1 { font-size: 2.2rem; }
+    header p { margin-top: 5px; font-size: 1rem; }
+    nav { display: flex; justify-content: center; gap: 24px; background: #3b82f6; padding: 15px 0; font-size: 1rem; }
     nav a { color: white; text-decoration: none; font-weight: 600; }
-    .hero { text-align: center; padding: 60px 20px; background: linear-gradient(135deg, #3b82f6, #1e40af); color: white; }
-    .hero h2 { font-size: 2.5rem; margin-bottom: 20px; }
-    .hero p { font-size: 1.2rem; }
-    .section { padding: 40px 20px; max-width: 1000px; margin: auto; }
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-    .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .card h3 { margin-bottom: 10px; font-size: 1.2rem; }
-    .card p { font-size: 0.95rem; }
-    footer { text-align: center; padding: 20px; background: #1e40af; color: white; margin-top: 60px; }
+    .hero { text-align: center; padding: 80px 20px; background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; }
+    .hero h2 { font-size: 2.8rem; margin-bottom: 20px; }
+    .hero p { font-size: 1.25rem; max-width: 600px; margin: auto; }
+    .section { padding: 50px 20px; max-width: 1100px; margin: auto; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 30px; }
+    .card { background: white; padding: 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+    .card h3 { margin-bottom: 12px; font-size: 1.3rem; color: #1d4ed8; }
+    .card p { font-size: 1rem; color: #333; }
+    footer { text-align: center; padding: 30px; background: #1d4ed8; color: white; margin-top: 60px; font-size: 0.95rem; }
 
     #chatbot-container { position: fixed; bottom: 20px; right: 20px; width: 90%; max-width: 320px; max-height: 500px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); overflow: hidden; display: flex; flex-direction: column; z-index: 9999; }
-    #chatbot-header { background: #1e40af; color: white; padding: 10px; font-weight: bold; text-align: center; }
+    #chatbot-header { background: #1d4ed8; color: white; padding: 10px; font-weight: bold; text-align: center; }
     #chatbot-messages { flex-grow: 1; padding: 10px; overflow-y: auto; font-size: 0.95rem; }
     .msg { margin: 5px 0; }
     .user { text-align: right; }
-    .bot { text-align: left; color: #1e40af; }
+    .bot { text-align: left; color: #1d4ed8; }
     #chatbot-input { display: flex; border-top: 1px solid #ccc; }
     #chatbot-input input { flex-grow: 1; padding: 10px; border: none; }
-    #chatbot-input button { background: #1e40af; color: white; border: none; padding: 0 15px; cursor: pointer; }
+    #chatbot-input button { background: #1d4ed8; color: white; border: none; padding: 0 15px; cursor: pointer; }
 
     @media (max-width: 600px) {
-      .hero h2 { font-size: 1.8rem; }
+      .hero h2 { font-size: 2rem; }
       .hero p { font-size: 1rem; }
-      .card h3 { font-size: 1rem; }
-      .card p { font-size: 0.85rem; }
+      .card h3 { font-size: 1.1rem; }
+      .card p { font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>SplatkyProVsechny.cz</h1>
+    <h1>Reality na splátky</h1>
     <p>Bydlení, auta a produkty dostupné pro každého – i bez banky</p>
   </header>
   <nav>
@@ -61,12 +63,12 @@
     <h2>Bydlení na splátky</h2>
     <div class="cards">
       <div class="card">
-        <h3>2+kk, Praha</h3>
-        <p>Bez hypotéky, první splátka 45 000 Kč, měsíčně 12 500 Kč</p>
+        <h3>2+1, Krupka</h3>
+        <p>Zařízený byt bez hypotéky – 1 390 000 Kč, splátky 11 000 Kč/měsíčně.</p>
       </div>
       <div class="card">
-        <h3>Rodinný dům, Plzeň</h3>
-        <p>Na splátky přímo přes investora. Možnost úpravy splátkového plánu.</p>
+        <h3>2+kk, Praha</h3>
+        <p>Bez hypotéky, první splátka 45 000 Kč, měsíčně 12 500 Kč</p>
       </div>
     </div>
   </section>
@@ -81,10 +83,6 @@
       <div class="card">
         <h3>BMW 3 E90</h3>
         <p>Možný odklad splátek, schválení do 24h</p>
-      </div>
-      <div class="card">
-        <h3>Volkswagen Passat B8</h3>
-        <p>Na splátky od 8 000 Kč, bez kontroly registrů – více na splatkyaut.cz</p>
       </div>
     </div>
   </section>
@@ -104,14 +102,20 @@
   </section>
 
   <footer id="kontakt">
-    <p>&copy; 2025 SplatkyProVsechny.cz – Made with 💙 by Gulinho</p>
+    <p>&copy; 2025 Reality na splátky – Made with 💙 by Gulinho</p>
   </footer>
 
   <!-- AI Chatbot -->
   <div id="chatbot-container">
     <div id="chatbot-header">💬 Gulinho AI</div>
     <div id="chatbot-messages">
-      <div class="msg bot">Čau! Jsem Gulinho bot a pomůžu ti s bydlením, auty nebo nákupem na splátky. Co tě zajímá?</div>
+      <div class="msg bot">Ahoj! Jsem Gulinho bot. Vyber jednu možnost:
+        <ul>
+          <li>🏡 Chci koupit byt na splátky</li>
+          <li>🚗 Hledám auto na splátky</li>
+          <li>💸 Chci investovat do nemovitosti</li>
+        </ul>
+      </div>
     </div>
     <div id="chatbot-input">
       <input type="text" id="user-input" placeholder="Napiš mi sem…" />
@@ -119,7 +123,33 @@
     </div>
   </div>
 
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('user-input');
+      const messages = document.getElementById('chatbot-messages');
+      const text = input.value.trim();
+      if (!text) return;
+      const userMsg = document.createElement('div');
+      userMsg.className = 'msg user';
+      userMsg.textContent = text;
+      messages.appendChild(userMsg);
+      input.value = '';
 
-
+      // Simple hardcoded bot responses
+      const botMsg = document.createElement('div');
+      botMsg.className = 'msg bot';
+      if (text.toLowerCase().includes('byt')) {
+        botMsg.textContent = 'Super! Napiš mi, o jakou lokalitu máš zájem a jakou výši splátky si můžeš dovolit.';
+      } else if (text.toLowerCase().includes('auto')) {
+        botMsg.textContent = 'Auta máme i bez registru. Jaké preferuješ? Značka, rok, rozpočet?';
+      } else if (text.toLowerCase().includes('investovat')) {
+        botMsg.textContent = 'Skvělé! Mám pro tebe návrh investičního bytu. Chceš výnos 6–8 % ročně?';
+      } else {
+        botMsg.textContent = 'Můžeš se mě zeptat na byty, auta nebo investice. Jsem tu pro tebe!';
+      }
+      messages.appendChild(botMsg);
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
 </body>
 </html>
