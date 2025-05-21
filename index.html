@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -5,48 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reality na splátky | Gulinho</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background: #f6f7fb; color: #111; line-height: 1.6; }
-    header { background: #1d4ed8; padding: 20px; color: white; text-align: center; }
-    header h1 { font-size: 2.2rem; }
-    header p { margin-top: 5px; font-size: 1rem; }
-    nav { display: flex; justify-content: center; gap: 24px; background: #3b82f6; padding: 15px 0; font-size: 1rem; }
-    nav a { color: white; text-decoration: none; font-weight: 600; }
-    .hero { text-align: center; padding: 80px 20px; background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; }
-    .hero h2 { font-size: 2.8rem; margin-bottom: 20px; }
-    .hero p { font-size: 1.25rem; max-width: 600px; margin: auto; }
-    .section { padding: 50px 20px; max-width: 1100px; margin: auto; }
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 30px; }
-    .card { background: white; padding: 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: all 0.3s ease; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
-    .card h3 { margin-bottom: 12px; font-size: 1.3rem; color: #1d4ed8; }
-    .card p { font-size: 1rem; color: #333; }
-    footer { text-align: center; padding: 30px; background: #1d4ed8; color: white; margin-top: 60px; font-size: 0.95rem; }
-
-    #chatbot-container { position: fixed; bottom: 20px; right: 20px; width: 90%; max-width: 320px; max-height: 500px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); overflow: hidden; display: flex; flex-direction: column; z-index: 9999; }
-    #chatbot-header { background: #1d4ed8; color: white; padding: 10px; font-weight: bold; text-align: center; }
-    #chatbot-messages { flex-grow: 1; padding: 10px; overflow-y: auto; font-size: 0.95rem; }
-    .msg { margin: 5px 0; }
-    .user { text-align: right; }
-    .bot { text-align: left; color: #1d4ed8; }
-    .bot-options button { display: block; width: 100%; margin-top: 5px; background: none; border: none; color: #1d4ed8; text-align: left; padding: 6px 0; cursor: pointer; font-size: 0.95rem; }
-    #chatbot-input { display: flex; border-top: 1px solid #ccc; }
-    #chatbot-input input { flex-grow: 1; padding: 10px; border: none; }
-    #chatbot-input button { background: #1d4ed8; color: white; border: none; padding: 0 15px; cursor: pointer; }
-
-    @media (max-width: 600px) {
-      .hero h2 { font-size: 2rem; }
-      .hero p { font-size: 1rem; }
-      .card h3 { font-size: 1.1rem; }
-      .card p { font-size: 0.9rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- obsah stránky zůstává stejný... -->
+  <header>
+    <h1>Reality na splátky</h1>
+    <p>Bydlení, auta a produkty dostupné pro každého – i bez banky</p>
+  </header>
 
-  <!-- AI Chatbot (GPT napojený) -->
+  <section class="hero">
+    <h2>Bez banky. Bez stresu. Na splátky.</h2>
+    <p>AI ti pomůže najít nejlepší nabídku na míru – klikni a vybírej.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Reality na splátky – Made with 💙 by Gulinho</p>
+  </footer>
+
   <div id="chatbot-container">
     <div id="chatbot-header">💬 Gulinho AI</div>
     <div id="chatbot-messages">
@@ -65,56 +41,6 @@
     </div>
   </div>
 
-  <script>
-  const OPENAI_API_KEY = "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";
-
-  function simulateClick(text) {
-    document.getElementById('user-input').value = text;
-    sendMessage();
-  }
-
-  async function sendMessage() {
-    const input = document.getElementById('user-input');
-    const messagesContainer = document.getElementById('chatbot-messages');
-    const text = input.value.trim();
-    if (!text) return;
-
-    const userMsg = document.createElement('div');
-    userMsg.className = 'msg user';
-    userMsg.textContent = text;
-    messagesContainer.appendChild(userMsg);
-    input.value = '';
-
-    const loadingMsg = document.createElement('div');
-    loadingMsg.className = 'msg bot';
-    loadingMsg.textContent = 'Přemýšlím...';
-    messagesContainer.appendChild(loadingMsg);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + OPENAI_API_KEY
-      },
-      body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [
-          { role: 'system', content: 'Jsi chytrý asistent zaměřený na reality na splátky, investice a auta. Pomáhej stručně, jasně a přívětivě.' },
-          { role: 'user', content: text }
-        ]
-      })
-    });
-
-    const data = await response.json();
-    loadingMsg.remove();
-
-    const botMsg = document.createElement('div');
-    botMsg.className = 'msg bot';
-    botMsg.textContent = data.choices?.[0]?.message?.content || 'Omlouvám se, nastala chyba při komunikaci.';
-    messagesContainer.appendChild(botMsg);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-  }
-  </script>
+  <script src="chat.js"></script>
 </body>
 </html>
