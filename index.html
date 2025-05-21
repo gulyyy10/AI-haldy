@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -7,6 +6,68 @@
   <title>Reality na splátky | Gulinho</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    #chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 90%;
+      max-width: 320px;
+      max-height: 500px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      z-index: 9999;
+    }
+    #chatbot-header {
+      background: #1d4ed8;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+    #chatbot-messages {
+      flex-grow: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 0.95rem;
+    }
+    .msg { margin: 5px 0; }
+    .user { text-align: right; }
+    .bot { text-align: left; color: #1d4ed8; }
+    .bot-options button {
+      display: block;
+      width: 100%;
+      margin-top: 5px;
+      background: none;
+      border: none;
+      color: #1d4ed8;
+      text-align: left;
+      padding: 6px 0;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    #chatbot-input {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+    #chatbot-input input {
+      flex-grow: 1;
+      padding: 10px;
+      border: none;
+    }
+    #chatbot-input button {
+      background: #1d4ed8;
+      color: white;
+      border: none;
+      padding: 0 15px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -84,6 +145,64 @@
     </div>
   </div>
 
-  <script src="chat.js"></script>
+  <script>
+    const OPENAI_API_KEY = "TVŮJ_SK_PROJ_KLÍČ"; // nahraď vlastním bezpečným klíčem
+
+    function simulateClick(text) {
+      document.getElementById('user-input').value = text;
+      sendMessage();
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById('user-input');
+      const messagesContainer = document.getElementById('chatbot-messages');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const userMsg = document.createElement('div');
+      userMsg.className = 'msg user';
+      userMsg.textContent = text;
+      messagesContainer.appendChild(userMsg);
+      input.value = '';
+
+      const loadingMsg = document.createElement('div');
+      loadingMsg.className = 'msg bot';
+      loadingMsg.textContent = 'Přemýšlím...';
+      messagesContainer.appendChild(loadingMsg);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      try {
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + OPENAI_API_KEY
+          },
+          body: JSON.stringify({
+            model: 'gpt-3.5-turbo',
+            messages: [
+              { role: 'system', content: 'Jsi chytrý asistent zaměřený na reality na splátky, investice a auta.' },
+              { role: 'user', content: text }
+            ]
+          })
+        });
+
+        const data = await response.json();
+        loadingMsg.remove();
+
+        const botMsg = document.createElement('div');
+        botMsg.className = 'msg bot';
+        botMsg.textContent = data.choices?.[0]?.message?.content || 'Omlouvám se, chyba v odpovědi.';
+        messagesContainer.appendChild(botMsg);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      } catch (error) {
+        loadingMsg.remove();
+        const botMsg = document.createElement('div');
+        botMsg.className = 'msg bot';
+        botMsg.textContent = 'Došlo k chybě při komunikaci s AI.';
+        messagesContainer.appendChild(botMsg);
+      }
+    }
+  </script>
 </body>
 </html>
